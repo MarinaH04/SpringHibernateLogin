@@ -16,9 +16,6 @@ import com.hanzu.proiect.persistence.dao.StudentDAO;
 import com.hanzu.proiect.persistence.entity.Student;
 
 
-
-
-
 @Repository
 @Transactional
 public class StudentDAOImpl implements StudentDAO {
@@ -28,7 +25,7 @@ public class StudentDAOImpl implements StudentDAO {
 	 
 	@Override
 	public void saveOrUpdate(Student student) {
-		new PersistanceOperations().saveOrUpdate(sessionFactory, student,"Student: "+student.getStudentID() + student.getUsername()+" saved!");
+		new PersistanceOperations().saveOrUpdate(sessionFactory, student,"Student: "+student.getUsername()+" saved!");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -46,20 +43,18 @@ public class StudentDAOImpl implements StudentDAO {
 		List<Student> studenti = sessionFactory.getCurrentSession().createCriteria(Student.class).list();
 		return studenti;
 	}
-	public void displayStudent(){
+	public List<Student> displayStudent(){
 		Session session = this.sessionFactory.openSession();
-		@SuppressWarnings("unchecked")
-		List<Object> result = session.createQuery("FROM Student").list();
-		if(result!=null) {
-			for(Object obj: result) {
-				System.out.println(obj.toString());
-			}
-			
-		}
-		else {
-			System.out.println("No result");
-		}
+		List<Student> result = null;
+		try {
 		
+		 result = session.createQuery("FROM Student").list();
+		
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		return result;
 	}
 	
 	public void deleteStudent(Integer studID) {

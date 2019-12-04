@@ -17,6 +17,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 
 
 
@@ -48,6 +50,7 @@ public class Student {
 	@JoinTable(name = "studcurs", joinColumns = { 
 			@JoinColumn(name = "studID") }, 
 			inverseJoinColumns = { @JoinColumn(name = "cursuriID") })
+	 @JsonManagedReference
 	  private Set<Cursuri> cursuri = new HashSet<Cursuri>();
 	
 	public Student() {}
@@ -62,17 +65,17 @@ public class Student {
 		    cursuri.add(curs); 
 		  }
 	  
-	  public boolean equals(Object o) {
-		    if (this == o) {
-		      return true;
-		    }
-
-		    if (!(o instanceof Student)) {
-		      return false;
-		    }
-
-		    return studentID != null && studentID.equals(((Student) o).getStudentID());
-		  }
+//	  public boolean equals(Object o) {
+//		    if (this == o) {
+//		      return true;
+//		    }
+//
+//		    if (!(o instanceof Student)) {
+//		      return false;
+//		    }
+//
+//		    return studentID != null && studentID.equals(((Student) o).getStudentID());
+//		  }
 
 	
 	public Integer getStudentID() {
@@ -117,7 +120,7 @@ public class Student {
 	@Override
 	public String toString() {
 		return "Student [studentID=" + studentID + ", username=" + username + ", email=" + email + ", password="
-				+ password + ", cursuri=" + cursuri.size() +"]";
+				+ password + ", cursuri=" + cursuri+"]";
 	}
 	
 	

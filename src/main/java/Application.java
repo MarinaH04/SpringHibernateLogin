@@ -20,8 +20,8 @@ public class Application {
 	final ApplicationContext appContext =
 	        new ClassPathXmlApplicationContext("applicationContext.xml");
 	final StudentDAO studentDAO = appContext.getBean(StudentDAO.class);
-//	final Student student1 = new Student("Andreea","andre@yahoo.com","1234");
-	final CursuriDAO cursDAO = appContext.getBean(CursuriDAO.class);
+//	final Student student1 = new Student("Alina","alina@yahoo.com","1234");
+//	final CursuriDAO cursDAO = appContext.getBean(CursuriDAO.class);
 //	final Cursuri cursuri = new Cursuri("Matematica");
 //	final Cursuri cursuri1 = new Cursuri("Economie");		
 	
@@ -33,26 +33,28 @@ public class Application {
 	
 	try {
 	
-	List<Student> detailList = studentDAO.displayStudents();
+	List<Student> detailList = studentDAO.displayStudent();
 	for (final Student stud : detailList){
 		
-	      System.out.println("Username: "+stud.getUsername()+"; Email: " + stud.getEmail() +"; Password: "+ stud.getPassword());
+	      System.out.println(stud.toString());
 	    }
 	}
 	catch(Exception ex) {
 		
 	}
-	Student marina = new Student();
-	marina = studentDAO.getUserByUsername("Marina");	
 	
-	
-	final List<Cursuri> cursuriList = cursDAO.getStudentCurs(marina);
 
-   System.out.println(marina.getUsername()+ "'s courses are: ");
-  for (final Cursuri curs: cursuriList) {
-    System.out.printf("Curs: '%s'\n", curs.getDenumire());
- }
- // studentDAO.deleteStudent(4);
+//	Student marina = new Student();
+
+//	
+//	
+//	final List<Cursuri> cursuriList = cursDAO.getStudentCurs(marina);
+//
+//   System.out.println(marina.getUsername()+ "'s courses are: ");
+//  for (final Cursuri curs: cursuriList) {
+//    System.out.printf("Curs: '%s'\n", curs.getDenumire());
+// }
+  //studentDAO.deleteStudent(6);
 	
 }
 }

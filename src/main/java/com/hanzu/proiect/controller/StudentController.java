@@ -21,7 +21,7 @@ public class StudentController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Student> getStudents(){
-		return studentDAO.displayStudents();
+		return studentDAO.displayStudent();
 		
 	}
 	

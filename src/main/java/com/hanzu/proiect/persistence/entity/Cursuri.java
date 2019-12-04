@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 
 
 @Entity
@@ -34,6 +36,7 @@ public class Cursuri {
 	@JoinTable(name = "studcurs",  joinColumns = {
 			@JoinColumn(name = "cursuriID") }, 
 			inverseJoinColumns = {  @JoinColumn(name = "studID") })
+	 @JsonBackReference
 	  private Set<Student> studenti = new HashSet<Student>();;
 	
 public Cursuri() {}
@@ -67,7 +70,7 @@ public Cursuri(String denumire) {
 
 	@Override
 	public String toString() {
-		return "Cursuri [cursID=" + cursID + ", denumire=" + denumire + ", studenti=" + studenti + "]";
+		return "Cursuri [cursID=" + cursID + ", denumire=" + denumire + ", studenti=" + studenti.size() + "]";
 	}
 	
 	
