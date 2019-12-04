@@ -12,7 +12,6 @@ import com.hanzu.proiect.persistence.entity.Student;
 
 
 
-
 public class Application {
 	public static void main(String[] args) {
 		
@@ -21,23 +20,39 @@ public class Application {
 	final ApplicationContext appContext =
 	        new ClassPathXmlApplicationContext("applicationContext.xml");
 	final StudentDAO studentDAO = appContext.getBean(StudentDAO.class);
-	final Student student1 = new Student("Marina","hanzumarina@yahoo.com","5678");
+//	final Student student1 = new Student("Andreea","andre@yahoo.com","1234");
 	final CursuriDAO cursDAO = appContext.getBean(CursuriDAO.class);
-	final Cursuri cursuri = new Cursuri("Matematica");
-	final Cursuri cursuri1 = new Cursuri("Economie");		
+//	final Cursuri cursuri = new Cursuri("Matematica");
+//	final Cursuri cursuri1 = new Cursuri("Economie");		
 	
-	cursDAO.saveOrUpdate(cursuri);
-	cursDAO.saveOrUpdate(cursuri1);
-	student1.addCursuri(cursDAO.getCursuri("Matematica"));
-	student1.addCursuri(cursDAO.getCursuri("Economie"));
-	studentDAO.saveOrUpdate(student1);	
-	studentDAO.readAll();
+//	cursDAO.saveOrUpdate(cursuri);
+//	cursDAO.saveOrUpdate(cursuri1);
+//	student1.addCursuri(cursDAO.getCursuri("Matematica"));
+//	student1.addCursuri(cursDAO.getCursuri("Economie"));
+//	studentDAO.saveOrUpdate(student1);
 	
-	final List<Cursuri> cursuriList = cursDAO.getStudentCurs(student1);
+	try {
+	
+	List<Student> detailList = studentDAO.displayStudents();
+	for (final Student stud : detailList){
+		
+	      System.out.println("Username: "+stud.getUsername()+"; Email: " + stud.getEmail() +"; Password: "+ stud.getPassword());
+	    }
+	}
+	catch(Exception ex) {
+		
+	}
+	Student marina = new Student();
+	marina = studentDAO.getUserByUsername("Marina");	
+	
+	
+	final List<Cursuri> cursuriList = cursDAO.getStudentCurs(marina);
 
-    System.out.println("'" + student1.getUsername()+ "'s courses are: ");
-    for (final Cursuri curs: cursuriList) {
-      System.out.printf("Curs: '%s'\n", curs.getDenumire());
-    }
+   System.out.println(marina.getUsername()+ "'s courses are: ");
+  for (final Cursuri curs: cursuriList) {
+    System.out.printf("Curs: '%s'\n", curs.getDenumire());
+ }
+ // studentDAO.deleteStudent(4);
+	
 }
 }

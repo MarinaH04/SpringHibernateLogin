@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +39,44 @@ public class StudentDAOImpl implements StudentDAO {
 	    for (final Student stud : detailList){
 	      System.out.printf(" Id:%s \t Username:%s \t Email:%s \t Password:%s \n", stud.getStudentID(), stud.getUsername(), stud.getEmail(), stud.getPassword());
 	    }
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Student> displayStudents() {
+		List<Student> studenti = sessionFactory.getCurrentSession().createCriteria(Student.class).list();
+		return studenti;
+	}
+	public void displayStudent(){
+		Session session = this.sessionFactory.openSession();
+		@SuppressWarnings("unchecked")
+		List<Object> result = session.createQuery("FROM Student").list();
+		if(result!=null) {
+			for(Object obj: result) {
+				System.out.println(obj.toString());
+			}
+			
+		}
+		else {
+			System.out.println("No result");
+		}
+		
+	}
+	
+	public void deleteStudent(Integer studID) {
+		 Session session = sessionFactory.openSession();
+		 session.beginTransaction();
+		  Student student = (Student)session.load(Student.class, studID);
+		
+		session.delete(student);
+		 
+		  session.getTransaction().commit();
+		  
+		    
+	 System.out.println("Deleted Successfully");
+	}
+	public Student getUserByUsername(String username){
+		 Session session = sessionFactory.getCurrentSession();
+		return (Student) session.createCriteria(Student.class).add(Restrictions.eq("username", username)).uniqueResult();
 	}
 
 }

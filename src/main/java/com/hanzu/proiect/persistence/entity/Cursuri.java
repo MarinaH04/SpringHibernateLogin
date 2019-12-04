@@ -1,7 +1,7 @@
 package com.hanzu.proiect.persistence.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,9 +32,9 @@ public class Cursuri {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST }, 
 			targetEntity = Student.class)
 	@JoinTable(name = "studcurs",  joinColumns = {
-			@JoinColumn(name = "cursuriID", nullable = false, updatable = true) }, 
-			inverseJoinColumns = {  @JoinColumn(name = "studID", nullable = false, updatable = true) })
-	private List<Student> studenti = new ArrayList<Student>();
+			@JoinColumn(name = "cursuriID") }, 
+			inverseJoinColumns = {  @JoinColumn(name = "studID") })
+	  private Set<Student> studenti = new HashSet<Student>();;
 	
 public Cursuri() {}
 	
@@ -57,11 +57,11 @@ public Cursuri(String denumire) {
 		this.denumire = denumire;
 	}
 
-	public List<Student> getStudenti() {
+	public Set<Student> getStudenti() {
 		return studenti;
 	}
 
-	public void setStudenti(List<Student> studenti) {
+	public void setStudenti(Set<Student> studenti) {
 		this.studenti = studenti;
 	}
 

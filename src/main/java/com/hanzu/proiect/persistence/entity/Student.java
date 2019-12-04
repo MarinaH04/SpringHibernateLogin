@@ -1,8 +1,9 @@
 package com.hanzu.proiect.persistence.entity;
 
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,10 +46,9 @@ public class Student {
 		},
 		targetEntity = Cursuri.class)
 	@JoinTable(name = "studcurs", joinColumns = { 
-			@JoinColumn(name = "studID", nullable = false, updatable = true) }, 
-			inverseJoinColumns = { @JoinColumn(name = "cursuriID", 
-					nullable = false, updatable = true) })
-	private List<Cursuri> cursuri = new ArrayList<Cursuri>();
+			@JoinColumn(name = "studID") }, 
+			inverseJoinColumns = { @JoinColumn(name = "cursuriID") })
+	  private Set<Cursuri> cursuri = new HashSet<Cursuri>();
 	
 	public Student() {}
 	public Student(String username, String email, String password) {
@@ -61,6 +61,19 @@ public class Student {
 		    System.out.printf("Adding course '%s' to '%s' \n", curs.getDenumire(), this.username);
 		    cursuri.add(curs); 
 		  }
+	  
+	  public boolean equals(Object o) {
+		    if (this == o) {
+		      return true;
+		    }
+
+		    if (!(o instanceof Student)) {
+		      return false;
+		    }
+
+		    return studentID != null && studentID.equals(((Student) o).getStudentID());
+		  }
+
 	
 	public Integer getStudentID() {
 		return studentID;
@@ -95,16 +108,16 @@ public class Student {
 	}
 	
 	
-	public List<Cursuri> getCursuri() {
+	public Set<Cursuri> getCursuri() {
 		return cursuri;
 	}
-	public void setCursuri(List<Cursuri> cursuri) {
+	public void setCursuri(Set<Cursuri> cursuri) {
 		this.cursuri = cursuri;
 	}
 	@Override
 	public String toString() {
 		return "Student [studentID=" + studentID + ", username=" + username + ", email=" + email + ", password="
-				+ password + ", cursuri=" + cursuri +"]";
+				+ password + ", cursuri=" + cursuri.size() +"]";
 	}
 	
 	
