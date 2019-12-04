@@ -43,7 +43,7 @@ public class Application {
 		
 	}
 	
-
+	System.out.println(studentDAO.getUserByUsername("Mada").toString());
 //	Student marina = new Student();
 
 //	

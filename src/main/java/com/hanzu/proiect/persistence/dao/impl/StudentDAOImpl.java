@@ -39,10 +39,6 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Student> displayStudents() {
-		List<Student> studenti = sessionFactory.getCurrentSession().createCriteria(Student.class).list();
-		return studenti;
-	}
 	public List<Student> displayStudent(){
 		Session session = this.sessionFactory.openSession();
 		List<Student> result = null;
@@ -70,8 +66,10 @@ public class StudentDAOImpl implements StudentDAO {
 	 System.out.println("Deleted Successfully");
 	}
 	public Student getUserByUsername(String username){
-		 Session session = sessionFactory.getCurrentSession();
-		return (Student) session.createCriteria(Student.class).add(Restrictions.eq("username", username)).uniqueResult();
+		 Session session = sessionFactory.openSession();
+		 Student studUser = null;
+		 studUser = (Student) session.createCriteria(Student.class).add(Restrictions.eq("username", username)).uniqueResult();
+		return studUser;
 	}
 
 }

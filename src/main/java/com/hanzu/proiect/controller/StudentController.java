@@ -26,9 +26,9 @@ public class StudentController {
 	}
 	
 	@GET
-	@Path("/student")
+	@Path("/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Student getStudents(@PathParam("student") String username){
+	public Student getStudents(@PathParam("username") String username){
 		return studentDAO.getUserByUsername(username);
 	}
 	

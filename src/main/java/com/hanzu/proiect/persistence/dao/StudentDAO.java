@@ -10,7 +10,6 @@ public interface StudentDAO {
 
 	  void readAll();
 	  public List<Student> displayStudent();
-	  public List<Student> displayStudents();
 	  void deleteStudent(Integer studID);
 	  public Student getUserByUsername(String username);
 }
