@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonManagedReference;
 
@@ -23,6 +24,7 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
 
 
 @Entity
+@XmlRootElement(name = "student")  
 @Table(name="student")
 public class Student {
 	

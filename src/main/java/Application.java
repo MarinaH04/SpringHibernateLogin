@@ -30,7 +30,7 @@ public class Application {
 //	student1.addCursuri(cursDAO.getCursuri("Matematica"));
 //	student1.addCursuri(cursDAO.getCursuri("Economie"));
 //	studentDAO.saveOrUpdate(student1);
-	
+//	studentDAO.insera("Andrei", "andreil@yahoo.com", "stpd");
 	try {
 	
 	List<Student> detailList = studentDAO.displayStudent();
@@ -43,7 +43,7 @@ public class Application {
 		
 	}
 	
-	System.out.println(studentDAO.getUserByUsername("Mada").toString());
+	System.out.println(studentDAO.getUserByUsername("Marina").toString());
 //	Student marina = new Student();
 
 //	
@@ -54,7 +54,7 @@ public class Application {
 //  for (final Cursuri curs: cursuriList) {
 //    System.out.printf("Curs: '%s'\n", curs.getDenumire());
 // }
-  //studentDAO.deleteStudent(6);
+  studentDAO.deleteStudent(7);
 	
 }
 }

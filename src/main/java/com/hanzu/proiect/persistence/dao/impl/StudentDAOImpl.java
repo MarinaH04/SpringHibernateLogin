@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -70,6 +71,17 @@ public class StudentDAOImpl implements StudentDAO {
 		 Student studUser = null;
 		 studUser = (Student) session.createCriteria(Student.class).add(Restrictions.eq("username", username)).uniqueResult();
 		return studUser;
+	}
+	public void insera(String username,String email, String password) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Student student = new Student();
+		student.setUsername(username);
+		student.setEmail(email);
+		student.setPassword(password);
+		session.save(student);
+		tx.commit();
+		session.close();
 	}
 
 }
