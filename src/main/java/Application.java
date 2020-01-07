@@ -52,7 +52,7 @@ public class Application {
 //
 //   System.out.println(marina.getUsername()+ "'s courses are: ");
 //  for (final Cursuri curs: cursuriList) {
-//    System.out.printf("Curs: '%s'\n", curs.getDenumire());
+//   System.out.printf("Curs: '%s'\n", curs.getDenumire());
 // }
   studentDAO.deleteStudent(7);
 	
